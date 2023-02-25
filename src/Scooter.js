@@ -1,9 +1,10 @@
 class Scooter {
+  static nextSerial = 1;
+
   constructor(station) {
     this.station = station;
     this.user = null;
-    this.serial = 1;
-    this.nextSerial = 1;
+    this.serial = Scooter.nextSerial++;
     this.charge = 100;
     this.isBroken = false;
   }
@@ -13,9 +14,9 @@ class Scooter {
       this.station = null;
       this.user = user;
     } else if (this.charge < 20) {
-      throw new Error(`Scooter needs to charge.`);
+      throw new Error(`Scooter ${this.serial} needs to charge.`);
     } else {
-      throw new Error(`Scooter needs repair.`);
+      throw new Error(`Scooter ${this.serial} needs repair.`);
     }
   }
 
@@ -26,13 +27,13 @@ class Scooter {
 
   recharge() {
     if (this.charge < 100) {
-      console.log(`Scooter is charging...`);
+      console.log(`Scooter ${this.serial} is charging...`);
       setInterval(() => {
         if (this.charge < 100) {
           this.charge += 10;
-          console.log(`Scooter battery percentage at ${this.charge}...`);
+          console.log(`Scooter ${this.serial} battery percentage at ${this.charge}...`);
         } else {
-          console.log(`Scooter has finished charging!`);
+          console.log(`Scooter ${this.serial} has finished charging!`);
         }
       }, 2000);
     }
@@ -40,7 +41,7 @@ class Scooter {
 
   requestRepair() {
     if (!this.isBroken) {
-      return `Scooter is working!`;
+      return `Scooter ${this.serial} is working!`;
     }
 
     console.log(`Scooter repair has been requested.`);

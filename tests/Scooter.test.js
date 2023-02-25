@@ -26,7 +26,7 @@ describe("Scooter", () => {
     scooter.charge = 10;
     expect(() => {
       scooter.rent("Nathan");
-    }).toThrowError("Scooter needs to charge.");
+    }).toThrowError(`Scooter ${scooter.serial} needs to charge.`);
   });
 
   test("renting a broken scooter throws an error", () => {
@@ -34,7 +34,7 @@ describe("Scooter", () => {
     scooter.isBroken = true;
     expect(() => {
       scooter.rent("Nathan");
-    }).toThrowError("Scooter needs repair.");
+    }).toThrowError(`Scooter ${scooter.serial} needs repair.`);
   });
 
   // dock method
@@ -58,7 +58,7 @@ describe("Scooter", () => {
 
   test("should let user know that scooter isn't broken", () => {
     scooter.isBroken = false;
-    expect(scooter.requestRepair()).toBe("Scooter is working!")
+    expect(scooter.requestRepair()).toBe(`Scooter ${scooter.serial} is working!`)
   })
 
   // charge method
