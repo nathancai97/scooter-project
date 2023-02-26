@@ -58,16 +58,28 @@ describe("Scooter", () => {
 
   test("should let user know that scooter isn't broken", () => {
     scooter.isBroken = false;
-    expect(scooter.requestRepair()).toBe(`Scooter ${scooter.serial} is working!`)
-  })
+    expect(scooter.requestRepair()).toBe(
+      `Scooter ${scooter.serial} is working!`
+    );
+  });
 
   // charge method
   test("charging scooter should charge correctly", () => {
     scooter.charge = 50;
     jest.useFakeTimers();
     scooter.recharge();
-    jest.advanceTimersByTime(10000);
+    jest.advanceTimersByTime(2000);
+    expect(scooter.charge).toBe(60);
+    jest.advanceTimersByTime(8000);
     expect(scooter.charge).toBe(100);
     jest.useRealTimers();
+  });
+
+  test("trying to charge a fully charged scooter should tell user its charged", () => {
+    scooter.name = "Nathan";
+    scooter.charge = 100;
+    expect(scooter.recharge()).toBe(
+      `Scooter ${scooter.serial} has finished charging!`
+    );
   });
 });

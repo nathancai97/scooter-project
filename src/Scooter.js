@@ -31,11 +31,14 @@ class Scooter {
       setInterval(() => {
         if (this.charge < 100) {
           this.charge += 10;
-          console.log(`Scooter ${this.serial} battery percentage at ${this.charge}...`);
-        } else {
-          console.log(`Scooter ${this.serial} has finished charging!`);
+          console.log(
+            `Scooter ${this.serial} battery percentage at ${this.charge}...`
+          );
         }
       }, 2000);
+    } else {
+      console.log(`Scooter ${this.serial} has finished charging!`);
+      return `Scooter ${this.serial} has finished charging!`;
     }
   }
 
